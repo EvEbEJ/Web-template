@@ -6,11 +6,12 @@ const searchSubmit = document.querySelector("#search-submit"); // search button
 const navMenu = document.querySelector("#nav-menu");
 const closeMenuBtn = document.querySelector("#close-menu");
 
+const afMenu = document.querySelector("#search-af-menu");
+
 searchbar.style.height = nav.clientHeight.toString() + "px"; // resize searchbar to navbar height
 
-searchInput.style.width = (searchForm.clientWidth - searchSubmit.clientWidth).toString() + "px";
-
 var preventSearch = false;
+var formSubmit = false;
 
 //listen for scroll
 window.addEventListener("scroll", () => {
@@ -29,8 +30,10 @@ window.addEventListener("scroll", () => {
 document.querySelector("#search-ico-ctr").addEventListener("click", () => {
     if (preventSearch == false) {
         preventSearch = true;
+        afMenu.style.display = "";
         searchbar.style.left = "";
         searchbar.style.display = "flex";
+        // width of input
         searchInput.style.width = (searchForm.clientWidth - searchSubmit.clientWidth).toString() + "px";
         searchbar.style.animationPlayState = "running";
         searchForm.style.outline = "2px solid #9cf";
@@ -41,6 +44,7 @@ document.querySelector("#search-ico-ctr").addEventListener("click", () => {
     let y = window.scrollY;
     searchInput.focus({preventScroll: true});
     setTimeout(() => {window.scrollTo(x, y)}, 0.01);
+    formFocus = true;
 })
 
 document.querySelector("#menu-ico-ctr").addEventListener("click", () => {
@@ -66,22 +70,45 @@ closeMenuBtn.addEventListener("click", () => {
     }, 400);
 })
 
+searchbar.addEventListener("focusin", () => {
+    console.log("Focused");
+})
 
 // on unfocus of search bar, close
 searchbar.addEventListener("animationend", () => {
-    searchInput.addEventListener("focusout", () => {
-        searchForm.style.outline = "";
-        searchbar.style.animation = "slide-fade-left-out 1s";
-        setTimeout(() => {
-            searchbar.style.left = "-100%";
-            searchbar.style.display = "";
-            searchbar.style.animation = "";
-            preventSearch = false;
-        }, 900); // wait until animation is done
+    searchbar.addEventListener("focusout", () => {
+        if (!formSubmit)
+        {
+            afMenu.style.display = "none";
+            searchForm.style.outline = "";
+            searchbar.style.animation = "slide-fade-left-out 1s";
+            setTimeout(() => {
+                searchbar.style.left = "-100%";
+                searchbar.style.display = "";
+                searchbar.style.animation = "";
+                preventSearch = false;
+            }, 400); // wait until animation is done
+        }
     }) 
 })
 
-// on resize of window, resize width of search bar
-window.addEventListener("resize", () => {
-    searchInput.style.width = "calc(70vw - 50px)";
+// submit search via btn
+searchSubmit.addEventListener("click", () => {
+    alert("submit!");
+    formSubmit = true;
+})
+
+// submit search via af
+afMenu.querySelectorAll("li").forEach(li => {
+    li.addEventListener("click", () => {
+        alert(`submit! ${li.textContent}`);
+        formSubmit = true;
+    })
+})
+
+// autocomplete options
+searchInput.addEventListener("input", () => {
+    if (!afMenu.querySelector("li")) {
+        afMenu.innerHTML = "<li><em>Search</em></li>"
+    }
 })
