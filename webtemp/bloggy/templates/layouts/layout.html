@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'images/ico/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/body.css' %}">
+    {% block head %}{% endblock %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <nav id="nav">
+        <div id="heading" class="nav-btn">
+            <a href="/" class="no-format-a">
+                <h2> The Website </h2>
+            </a>
+        </div>
+        <ul id="navbar" class="no-format-ul">
+            <li>
+                <a href="{% url 'bloggy:explore' %}" id="explore-btn" class="nav-btn">
+                    Explore
+                </a>
+            </li>
+            <li>
+                <a href="#" id="about-btn" class="nav-btn">
+                    Donate
+                </a>
+            </li>
+            <li>
+                <a href="#" id="store-btn" class="nav-btn">
+                    Store
+                    <div id="swoosh-ctr">
+                        <div id="swoosh"></div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div id="search">
+            <ul id="icobar" class="no-format-ul">
+                <li id="search-ico-ctr">
+                    <a href="#" id="search-ico" class="nav-btn">
+                        <i class="material-icons" style="font-size:28px">&#xe8b6;</i>
+                    </a>
+                </li>
+                <li id="menu-ico-ctr">
+                    <a href="#" id="menu-ico" class="nav-btn">
+                        <i class="material-icons" style="font-size:28px">&#xe5d2;</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="searchbar-ctr" class="layer-10">
+        <form action="{% url 'bloggy:search' %}" id="searchform" method="get">
+            <input type="text" name="q" id="searchbar" placeholder="Search the world of animals..." autocomplete="off">
+            <button type="submit" id="search-submit">
+                <i class="material-icons" style="font-size:28px">&#xe8b6;</i>
+            </button>
+            <ul id="search-ac-menu">
+            </ul>
+        </form>
+    </div>
+    <div id="nav-menu">
+        <div id="nav-menu-content">
+            <h2>The Website</h2>
+            <ul id="nav-menu-bar" class="no-format-ul">
+                <a href="{% url 'bloggy:explore' %}" class="menu-btn"><li>Explore</li></a>
+                <a href="#" class="menu-btn"><li>About</li></a>
+                <a href="#" class="menu-btn"><li>Subscribe</li></a>
+                <a href="#" class="menu-btn"><li>Donate</li></a>
+                <a href="#" class="menu-btn"><li>Store</li></a>
+            </ul>
+            <div id="close-menu-ctr">
+                <div id="close-menu">&times;</div>
+            </div>
+        </div>
+    </div>
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+    <footer>
+        <div id="column1" class="ft-column">
+            <div class="ft-top-row">
+                <div id="ft-about">
+                    <h1>The Website</h1>
+                    <p>
+                        The Website is a 503(c) non-profit organization, dedicated to educating the public about the beauty of animal life. All donations are tax-deductable.
+                    </p>
+                </div>
+                <div id="ft-list-ctr">
+                    <div>
+                        <ul class="no-format-ul ft-list">
+                            <li><a href="{% url 'bloggy:explore' %}">Explore</a></li>
+                            <li><a href="#">Donate</a></li>
+                            <li><a href="#">Store</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="no-format-ul ft-list">
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Subscribe</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="copyright">&copy; 2022 | The Website | Anon Y. Mousse</p>
+            </div>
+        </div>
+    </footer>
+    <script> </script>
+    <script src="{% static 'js/window_size.js' %}"></script>
+    <script src="{% static 'js/align.js' %}"></script>
+    <script src="{% static 'js/nav.js' %}"></script>
+    {% block script %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}Welcome to The World{% endblock %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/article.css' %}">
+{% endblock %}
+{% block body %}
+
+<div id="content">
+    <div class="readbar">
+        <h2>Popular Articles</h2>
+        <div id="featured-ac">
+            <img src="https://images.unsplash.com/photo-1648425024972-64303b9d353f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=800" alt="Lake Tahoe" id="featured-ac-img">
+            <h3 class="layer-2">Water and Life: Proof of a Creator</h3>
+            <div id="line-ctr" class="layer-2"></div>
+            <div class="gradient-top"></div>
+        </div>
+        <ul class="no-format-ul readbar-ul">
+            <li class="ac-thbn">
+                <div class="ac-thbn-img-ctr">
+                    <img src="https://images.unsplash.com/photo-1608235472173-d4918c4aeb49?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&w=300" alt="Banff" class="ac-thbn-img">
+                </div>
+                <div class="ac-thbn-heading">
+                    <h4>Mountains From the Flood</h4>
+                </div>
+                <div class="ac-tbhn-read">
+                    <button class="ac-thbn-read-btn">Read More</button>
+                </div>
+            </li>
+            <li class="ac-thbn">
+                <div class="ac-thbn-img-ctr">
+                    <img src="https://images.unsplash.com/photo-1503343870946-44cccad5de1b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&w=300" alt="Sun" class="ac-thbn-img">
+                </div>
+                <div class="ac-thbn-heading">
+                    <h4>The Earth's Solar Protection</h4>
+                </div>
+                <div class="ac-tbhn-read">
+                    <button class="ac-thbn-read-btn">Read More</button>
+                </div>
+            </li>
+            <li id="ac-thbn3" class="ac-thbn">
+                <div class="ac-thbn-img-ctr">
+                    <img src="https://images.unsplash.com/photo-1564198729838-cb82ee0c733c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&w=300" alt="Baobab tree" class="ac-thbn-img">
+                </div>
+                <div class="ac-thbn-heading">
+                    <h4>Photos of Madagascar</h4>
+                </div>
+                <div class="ac-tbhn-read">
+                    <button class="ac-thbn-read-btn">Read More</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

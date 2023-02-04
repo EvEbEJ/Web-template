@@ -1,0 +1,56 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}{{ article.title }}{% endblock %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/article.css' %}">
+{% endblock %}
+{% block body %}
+<div id="content">
+    <div class="article">
+        <h2 class="ac-title">{{ article.title }}</h2>
+        <p class="ac-author italic">Posted {{ article.created | date:"M d, Y" }} | By Anon Y. Mousse</p>
+        {% if article.cover %}
+            <div class="ac-ci-ctr1">
+                <div id="ac-ci-ctr2">
+                    <img src="{{ MEDIA_URL }}{{ article.cover }}" alt="Hummingbird" class="ac-ci">
+                    <p class="caption">
+                        The Critically Endangered Loremipsum Hummingbird from Western Cuba is here caught on camera by Anon Y. Mousse. This species is extremely elusive, so exact counts of the population remain uncertain. 
+                    </p>
+                    <p class="caption">
+                        &copy; 2022 The Website / Anon Y. Mousse
+                    </p>
+                </div>
+            </div>
+        {% endif %}
+        {% autoescape off %}
+            {{ article.content }}
+        {% endautoescape %}
+    </div>
+    <div class="readbar">
+        {% if related %}
+        <h2>Related Posts</h2>
+        <ul class="no-format-ul readbar-ul">
+            {% for link in related %}
+            <a href="{% url 'bloggy:article' link.slug %}" class="no-format-a">
+                <li class="ac-thbn">
+                    <div class="ac-thbn-img-ctr">
+                        {% if link.cover %}
+                            <img src="{{ MEDIA_URL }}{{ link.cover }}" alt="Finch" class="ac-thbn-img">
+                        {% else %}
+                            <img src="https://images.unsplash.com/photo-1668069676044-3aa1cda3c067?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&utm_source=unsplash_source&w=300" alt="Dragonfly" class="ac-thbn-img">
+                        {% endif %}
+                    </div>
+                    <div class="ac-thbn-heading">
+                        <h4>{{ link.title }}</h4>
+                    </div>
+                    <div class="ac-tbhn-read">
+                        <button class="ac-thbn-read-btn">Read More</button>
+                    </div>
+                </li>
+            </a>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

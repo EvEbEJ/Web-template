@@ -1,0 +1,38 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}Search Results{% endblock %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock %}
+{% block body %}
+<div id="content">
+    <div id="vis-searchbar-ctr">
+        <form action="{% url 'bloggy:search' %}" id="vis-searchform">
+            <input type="text" name="q" id="vis-searchbar" placeholder="Search the world of animals..." autocomplete="off" {% if q %}value="{{ q }}"{% endif %}>
+            <button type="submit" id="vis-search-submit">
+                <i class="material-icons" style="font-size:28px">&#xe8b6;</i>
+            </button>
+            <ul id="vis-search-ac-menu">
+            </ul>
+        </form>
+    </div>
+    <h1 class="m-20">Search Results{% if q %} for <em>{{ q }}</em>{% endif %}</h1>
+    {% if results %}
+    <ul class="no-format-ul">
+            {% for result in results %}
+                <li class="q-result-li">
+                    <a href="{% url 'bloggy:article' result.slug %}" class="q-result-a">
+                        <h3>{{ result.title }}</h3>
+                        <p>{{ result.escaped_body | truncatechars:440 }}</p>
+                    </a>
+                </li>
+            {% endfor %}
+    </ul>
+    {% else %}
+    No results
+    {% endif %}
+</div>
+{% endblock %}
+{% block script %}
+<script src="{% static 'js/search.js' %}"></script>
+{% endblock %}
